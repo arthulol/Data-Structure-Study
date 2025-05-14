@@ -1,0 +1,71 @@
+#include <iostream>
+//declarar um node (como se fosse um prato em um pilha de pratos) que tem um valor e um ponteiro para o node abaixo
+struct node{
+int valor;
+node* abaixo;
+};
+//declarar uma pilha que tem um tamanho e um ponteiro para o node topo
+class pilha{
+private: //atributos privados
+int tamanho;
+node* topo;
+public: //metodos publicos
+pilha();
+void push(int valor);
+void pop();
+void getTamanho();
+void isEmpty();
+int getTopo();
+};
+//declarar o construtor da pilha que inicializa o tamanho como 0 e o topo como NULL
+pilha::pilha(){
+  tamanho = 0;
+  topo = NULL;
+}
+//declarar o metodo push que recebe um valor e cria um novo node com esse valor e o ponteiro abaixo apontando para o topo atual, depois atualiza o topo para o novo node e incrementa o tamanho
+void pilha::push(int valor){
+  node* novo = new node();
+  novo->valor = valor;
+  if(tamanho==0){
+    novo->abaixo = NULL;
+    topo = novo;
+    tamanho++;
+  }
+  else{
+    novo->abaixo = topo;
+    topo = novo;
+    tamanho++;
+  }
+}
+//declarar o metodo pop que remove o node topo e atualiza o topo para o node abaixo, depois decrementa o tamanho
+void pilha::pop(){
+  if(tamanho==0)
+    std::cout << "Pilha vazia" << std::endl;
+  else{
+    node* aux = topo;
+    topo = topo->abaixo;
+    delete aux;
+    tamanho--;
+  }
+}
+//metodo getTopo que retorna o valor do node topo.
+int pilha::getTopo(){
+  return topo->valor;
+}
+//main que testa a pilha
+/*int main(){
+  
+  pilha teste;
+
+  teste.push(10);
+  teste.push(20);
+  teste.push(30);
+  std::cout << teste.getTopo() << std::endl;
+  teste.pop();
+  std::cout << teste.getTopo() << std::endl;
+  // console: 30 20
+  return 0;
+}*/
+
+
+
