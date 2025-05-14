@@ -1,0 +1,74 @@
+#include <iostream>
+
+struct node{
+int valor;
+node* prox = NULL;
+};
+
+class fila{
+
+private:
+int tamanho = 0;
+node* fim = NULL;
+node* inicio = NULL;
+public:
+fila();
+void enqueue(int valor);
+void dequeue();
+int peek();
+};
+
+fila::fila(){
+}
+
+void fila::enqueue(int value){
+  node* temp = new node;
+  temp->valor = value;
+
+  if(inicio == NULL){
+    inicio = temp;
+  } 
+  else{
+    fim->prox = temp;
+  }
+  tamanho ++;
+  fim = temp;  
+}
+
+void fila::dequeue(){
+
+  if(inicio==NULL){
+   std::cout << "Fila vazia";
+  }
+  else{
+    node* temp;
+    temp = inicio;
+    inicio = inicio->prox;
+    delete temp;
+    tamanho--;
+  }
+}
+
+int fila::peek(){
+  if(inicio==NULL){
+    std::cout << "Fila vazia";
+    return 0;
+  }
+    
+  else
+    return inicio->valor;
+}
+/*
+int main(){
+  fila fila;
+  fila.enqueue(10);
+  fila.enqueue(20);
+  fila.enqueue(30);
+  std::cout << fila.peek() << std::endl;
+  fila.dequeue();
+  std::cout << fila.peek() << std::endl;
+    // console: 10 20
+
+  
+  return 0;
+}*/
