@@ -1,0 +1,100 @@
+#include <iostream>
+
+struct node{
+ int valor;
+ node* prox;
+};
+
+class LinkedList{
+
+private:
+ node* inicio;
+ node* fim;
+ int tamanho;
+  
+public:
+  LinkedList();
+  void inserir(int valor);
+  void remover(); //pop
+  int verFinal();
+  int verCabeca();
+};
+
+LinkedList::LinkedList(){
+  inicio = NULL;
+  fim = NULL;
+  tamanho = 0;
+};
+
+void LinkedList::inserir(int valor){
+  node* novo = new node();
+  novo->valor = valor; //entao a seta é pra inserir diretamente o valor sem precisar de uma funcao, a seta é pra acessar o valor do node, e o * é pra acessar o node, e o & é pra acessar o endereco do node.
+  if(tamanho==0){
+    novo->prox = NULL;
+    inicio = novo;
+    fim = novo;
+    tamanho++;
+  }
+  else if(tamanho==1){
+     inicio->prox = novo;
+     fim = novo;
+     tamanho++;
+  }
+  else{
+   fim->prox = novo;
+   fim = novo;
+   tamanho++;
+  }
+}
+
+void LinkedList::remover(){
+if(tamanho==0){
+  std::cout << "Lista vazia" << std::endl;
+}
+  else if (tamanho==1){
+    inicio = NULL;
+    fim = NULL;
+    tamanho--;
+  }
+  else{
+    node* aux = inicio;
+    while(aux->prox != fim){
+      aux = aux->prox;
+    }
+    fim = aux;
+    fim->prox = NULL;
+    tamanho--;
+  }
+}
+
+int LinkedList::verFinal(){
+  return fim->valor;
+}
+
+int LinkedList::verCabeca(){
+  return inicio->valor;
+}
+
+/*int main() {
+  LinkedList lista;
+  
+  // Test inserting elements
+  lista.inserir(10);
+  lista.inserir(20);
+  lista.inserir(30);
+  
+  // Test viewing head and tail
+  std::cout << "Head value: " << lista.verCabeca() << std::endl;
+  std::cout << "Tail value: " << lista.verFinal() << std::endl;
+  
+  // Test removing elements
+  lista.remover();
+  std::cout << "After removing tail, new tail value: " << lista.verFinal() << std::endl;
+  
+  // Test empty list handling
+  lista.remover();
+  lista.remover();
+  lista.remover(); // Should print "Lista vazia"
+  
+  return 0;
+}*/
