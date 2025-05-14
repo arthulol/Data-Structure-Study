@@ -1,0 +1,71 @@
+#include <iostream>
+struct node{
+  int valor;
+  node* esquerda;
+  node* direita;
+  node* pai;
+};
+
+class ArvoreSequencial{
+ private:
+  node* raiz;
+ public:
+  ArvoreSequencial(int valor);
+  void inserir(int valor);
+  void remover(int valor);
+  void imprimir();
+};
+
+void ArvoreSequencial::inserir(int valor){
+  if(raiz != NULL){
+  node* temp = new node;
+  temp->valor = valor;
+  temp->esquerda = NULL;
+  temp->direita = NULL;
+  vetor[valor-1] = temp;
+  temp->esquerda;
+  
+  }
+}
+
+ArvoreSequencial::ArvoreSequencial(int valor){
+  if(valor == 0){
+    raiz = NULL;
+    return;
+  }
+  else{
+    node** vetor = new node*[valor];
+  raiz = new node;
+  raiz->valor = 1;
+  raiz->pai = NULL;
+  raiz->esquerda = NULL;
+  raiz->direita = NULL;
+  vetor[0] = raiz;
+   // Se botar por exemplo 10,a arvore cria 10 nodes em sequencia, 
+  //    1
+  //   2 3
+  // 4 5 6 7
+  // 8 9 10 Null
+  for(int k=1;k<valor;k++){
+    vetor[k] = new node;
+    vetor[k]->valor = k+1;
+    int esq = 2*k+1;
+    int dir = 2*k+2;
+    
+    if(esq < valor){
+      vetor[k]->esquerda = vetor[esq];
+      vetor[esq]->pai = vetor[k];
+    }
+    else{
+      vetor[k]->esquerda = NULL;
+    }
+    if(dir < valor){
+      vetor[k]->direita = vetor[dir];
+      vetor[dir]->pai = vetor[k];
+    }
+    else{
+      vetor[k]->direita = NULL;
+    }
+  }
+}
+}
