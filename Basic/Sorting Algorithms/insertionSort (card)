@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+void insertionSort(int vetor[], int tamanho){
+  for(int i= 1;i<tamanho;i++){
+    int pivot = vetor[i];
+    int j = i-1;
+    while(j>=0 && vetor[j]>pivot){
+      vetor[j+1] = vetor[j];
+      j--;
+    }
+    vetor[j+1] = pivot;
+  }
+}
+
+int main(){
+   int array[] = {44,35,22,9,32,5,10,47};
+   int x = 8;
+
+   cout << "Array antes:\n";
+   for(int i=0;i<x;i++){
+     cout << array[i] << " ";
+   }
+
+   insertionSort(array,x);
+   cout << "\n Array depois: \n";
+     for(int i=0;i<x;i++){
+        cout << array[i] << " ";
+      }
+
+  return 0;
+}
